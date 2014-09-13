@@ -1,4 +1,4 @@
-package net.greenwind.bettertools.util;
+package net.voxelvoid.bettertools.util;
 
 import java.util.Arrays;
 import org.bukkit.Material;
@@ -7,6 +7,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 /**
  * @author Tim
+ * @author Matthijs
  */
 public class ToolUtil {
     

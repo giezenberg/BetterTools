@@ -1,0 +1,10 @@
+name: BetterTools
+version: 0.0.1
+main: net.voxelvoid.bettertools.BetterTools
+author: "VoxelVoid Dev Team"
+
+commands:
+  tool:
+    usage: /<command> <type>
+    description: Gives you one of the mighty tools
+    aliases: [tools]
