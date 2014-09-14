@@ -30,7 +30,7 @@ public class CommandSmelt implements CommandExecutor {
                 player = (Player) sender;
             } else {
                 sender.sendMessage(plugin.prefix + ChatColor.RED + "You are not a player!");
-                return false;
+                return true;
             }
             
             if (player.hasPermission(perm)) {

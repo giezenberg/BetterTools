@@ -52,7 +52,8 @@ public class PickaxeSmelt implements Listener {
                     if (item.getItemMeta().getDisplayName().equals(plugin.DiamondSmelt.getItemMeta().getDisplayName())) {
 
                         if (plugin.DiamondList.containsKey(brokenm)) {
-                            broken.breakNaturally();
+                            broken.getWorld().dropItemNaturally(broken.getLocation(), plugin.DiamondList.get(broken.getType()));
+                            broken.setType(Material.AIR);
                         }
                     }
                 // Gold Pickaxe
@@ -61,8 +62,8 @@ public class PickaxeSmelt implements Listener {
                     if (item.getItemMeta().getDisplayName().equals(plugin.GoldSmelt.getItemMeta().getDisplayName())) {
 
                         if (plugin.GoldList.containsKey(brokenm)) {
-                            broken.setType(Material.AIR);
                             broken.getWorld().dropItemNaturally(broken.getLocation(), plugin.GoldList.get(broken.getType()));
+                            broken.setType(Material.AIR);
                         }
                     }
                 // Iron Pickaxe
@@ -71,8 +72,8 @@ public class PickaxeSmelt implements Listener {
                     if (item.getItemMeta().getDisplayName().equals(plugin.IronSmelt.getItemMeta().getDisplayName())) {
 
                         if (plugin.IronList.containsKey(brokenm)) {
-                            broken.setType(Material.AIR);
                             broken.getWorld().dropItemNaturally(broken.getLocation(), plugin.IronList.get(broken.getType()));
+                            broken.setType(Material.AIR);
                         }
                     }
                 // Stone Pickaxe
@@ -81,8 +82,8 @@ public class PickaxeSmelt implements Listener {
                     if (item.getItemMeta().getDisplayName().equals(plugin.StoneSmelt.getItemMeta().getDisplayName())) {
 
                         if (plugin.StoneList.containsKey(brokenm)) {
-                            broken.setType(Material.AIR);
                             broken.getWorld().dropItemNaturally(broken.getLocation(), plugin.StoneList.get(broken.getType()));
+                            broken.setType(Material.AIR);
                         }
                     }
                 // Wood Pickaxe
@@ -91,8 +92,8 @@ public class PickaxeSmelt implements Listener {
                     if (item.getItemMeta().getDisplayName().equals(plugin.WoodSmelt.getItemMeta().getDisplayName())) {
 
                         if (plugin.WoodList.containsKey(brokenm)) {
-                            broken.setType(Material.AIR);
                             broken.getWorld().dropItemNaturally(broken.getLocation(), plugin.WoodList.get(broken.getType()));
+                            broken.setType(Material.AIR);
                         }
                     }
                 }

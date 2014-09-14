@@ -42,6 +42,7 @@ public class BetterTools extends JavaPlugin {
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new PickaxeSmelt(this), this);
+        getServer().getPluginManager().registerEvents(new PickaxeExplode(this), this);
         
         // Load the Commands
         loadCommands();
