@@ -11,6 +11,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
@@ -22,7 +23,7 @@ import org.bukkit.inventory.ItemStack;
 public class PickaxeExplode implements Listener {
     private BetterTools plugin;
     
-    private static List<String> breakable = new ArrayList<>();
+    
     
     private ItemStack DiamondPickaxe = ToolUtil.createTool(ChatColor.RED + "Diamond" + ChatColor.WHITE + " Explosion-Pickaxe", Material.DIAMOND_PICKAXE, ChatColor.GOLD + "The incredible explosion-pickaxe", ChatColor.GOLD + "Mines a 5x5, very fancy!");
     private ItemStack GoldPickaxe = ToolUtil.createTool(ChatColor.RED + "Golden" + ChatColor.WHITE + " Explosion-Pickaxe", Material.GOLD_PICKAXE, ChatColor.GOLD + "The incredible explosion-pickaxe", ChatColor.GOLD + "Mines a full 3x3");
@@ -33,6 +34,7 @@ public class PickaxeExplode implements Listener {
         this.plugin = instance;
     }
     
+    @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
         Player player = e.getPlayer();
         Block centre = e.getBlock();
@@ -46,25 +48,32 @@ public class PickaxeExplode implements Listener {
         if (!item.getItemMeta().getEnchants().containsKey(Enchantment.LOOT_BONUS_BLOCKS) || !item.getItemMeta().getEnchants().containsKey(Enchantment.SILK_TOUCH)) {
             
             // Iron Pickaxe
-            if (item.getType() == Material.IRON_PICKAXE) {
+            if (item.getType() == Material.DIAMOND_PICKAXE) {
                 
                 if (item.getItemMeta().getDisplayName().equals(DiamondPickaxe.getItemMeta().getDisplayName())) {
-                    breakingIron(centre);
+                    breaking(5, centre);
+                }
+            } else if (item.getType() == Material.GOLD_PICKAXE) {
+                
+                if (item.getItemMeta().getDisplayName().equals(GoldPickaxe.getItemMeta().getDisplayName())) {
+                    breaking(3, centre);
+                }
+            } else if (item.getType() == Material.IRON_PICKAXE) {
+                
+                if (item.getItemMeta().getDisplayName().equals(IronPickaxe.getItemMeta().getDisplayName())) {
+                    breaking(3, centre);
+                }
+            } else if (item.getType() == Material.STONE_PICKAXE) {
+                
+                if (item.getItemMeta().getDisplayName().equals(StonePickaxe.getItemMeta().getDisplayName())) {
+                    breaking(2, centre);
                 }
             }
         }
     }
+
     
-    public static void setup() {
-        breakable.add("STONE");
-        breakable.add("LAPIS_ORE");
-        breakable.add("REDSTONE_ORE");
-        breakable.add("IRON_ORE");
-        breakable.add("GOLD_ORE");
-        breakable.add("DIAMOND_ORE");
-    }
-    
-    public void breakingIron(Block target) {
+    private void breaking(int big, Block target) {
         Block b1;
         Block b2;
         Block b3;
@@ -73,41 +82,189 @@ public class PickaxeExplode implements Listener {
         Block b6;
         Block b7;
         Block b8;
+        Block b9;
+        Block b10;
+        Block b11;
+        Block b12;
+        Block b13;
+        Block b14;
+        Block b15;
+        Block b16;
+        Block b17;
+        Block b18;
+        Block b19;
+        Block b20;
+        Block b21;
+        Block b22;
+        Block b23;
+        Block b24;
         
-        for (String s : breakable) {
-            if (target.getRelative(BlockFace.UP).getType() == Material.AIR) {
-                b1 = target.getRelative(BlockFace.NORTH, 1);
-                b2 = target.getRelative(BlockFace.NORTH_EAST, 1);
-                b3 = target.getRelative(BlockFace.EAST, 1);
-                b4 = target.getRelative(BlockFace.SOUTH_EAST, 1);
-                b5 = target.getRelative(BlockFace.SOUTH, 1);
-                b6 = target.getRelative(BlockFace.SOUTH_WEST, 1);
-                b7 = target.getRelative(BlockFace.WEST, 1);
-                b8 = target.getRelative(BlockFace.NORTH_WEST, 1);
+        if (big == 5) {
+            for (String s : plugin.breakable) {
+                if (target.getRelative(BlockFace.UP).getType() == Material.AIR) {
+                    // Toplayer
+                    b1 = target.getRelative(BlockFace.NORTH_WEST, 2);
+                    b2 = target.getRelative(BlockFace.NORTH_NORTH_WEST, 1);
+                    b3 = target.getRelative(BlockFace.NORTH, 2);
+                    b4 = target.getRelative(BlockFace.NORTH_NORTH_EAST, 1);
+                    b5 = target.getRelative(BlockFace.NORTH_EAST, 2);
+                    // Secondlayer
+                    b6 = target.getRelative(BlockFace.WEST_NORTH_WEST, 1);
+                    b7 = target.getRelative(BlockFace.NORTH_WEST, 1);
+                    b8 = target.getRelative(BlockFace.NORTH, 1);
+                    b9 = target.getRelative(BlockFace.NORTH_EAST, 1);
+                    b10 = target.getRelative(BlockFace.EAST_NORTH_EAST, 1);
+                    // Thirdlayer
+                    b11 = target.getRelative(BlockFace.WEST, 2);
+                    b12 = target.getRelative(BlockFace.WEST, 1);
+                        // Middle is here
+                    b13 = target.getRelative(BlockFace.EAST, 1);
+                    b14 = target.getRelative(BlockFace.EAST, 2);
+                    // Fourthlayer
+                    b15 = target.getRelative(BlockFace.WEST_SOUTH_WEST, 1);
+                    b16 = target.getRelative(BlockFace.SOUTH_WEST, 1);
+                    b17 = target.getRelative(BlockFace.SOUTH, 1);
+                    b18 = target.getRelative(BlockFace.SOUTH_EAST, 1);
+                    b19 = target.getRelative(BlockFace.EAST_SOUTH_EAST, 1);
+                    // Fivethlayer
+                    b20 = target.getRelative(BlockFace.SOUTH_WEST, 2);
+                    b21 = target.getRelative(BlockFace.SOUTH_SOUTH_WEST, 1);
+                    b22 = target.getRelative(BlockFace.SOUTH, 2);
+                    b23 = target.getRelative(BlockFace.SOUTH_SOUTH_EAST, 1);
+                    b24 = target.getRelative(BlockFace.SOUTH_EAST, 2);
 
-                if (b1.getType() == Material.getMaterial(s)) {
-                    b1.breakNaturally();
+                    if (b1.getType() == Material.getMaterial(s)) {
+                        b1.breakNaturally();
+                    }
+                    if (b2.getType() == Material.getMaterial(s)) {
+                        b2.breakNaturally();
+                    }
+                    if (b3.getType() == Material.getMaterial(s)) {
+                        b3.breakNaturally();
+                    }
+                    if (b4.getType() == Material.getMaterial(s)) {
+                        b4.breakNaturally();
+                    }
+                    if (b5.getType() == Material.getMaterial(s)) {
+                        b5.breakNaturally();
+                    }
+                    if (b6.getType() == Material.getMaterial(s)) {
+                        b6.breakNaturally();
+                    }
+                    if (b7.getType() == Material.getMaterial(s)) {
+                        b7.breakNaturally();
+                    }
+                    if (b8.getType() == Material.getMaterial(s)) {
+                        b8.breakNaturally();
+                    }
+                    if (b9.getType() == Material.getMaterial(s)) {
+                        b9.breakNaturally();
+                    }
+                    if (b10.getType() == Material.getMaterial(s)) {
+                        b10.breakNaturally();
+                    }
+                    if (b11.getType() == Material.getMaterial(s)) {
+                        b11.breakNaturally();
+                    }
+                    if (b12.getType() == Material.getMaterial(s)) {
+                        b12.breakNaturally();
+                    }
+                    if (b13.getType() == Material.getMaterial(s)) {
+                        b13.breakNaturally();
+                    }
+                    if (b14.getType() == Material.getMaterial(s)) {
+                        b14.breakNaturally();
+                    }
+                    if (b15.getType() == Material.getMaterial(s)) {
+                        b15.breakNaturally();
+                    }
+                    if (b16.getType() == Material.getMaterial(s)) {
+                        b16.breakNaturally();
+                    }
+                    if (b17.getType() == Material.getMaterial(s)) {
+                        b17.breakNaturally();
+                    }
+                    if (b18.getType() == Material.getMaterial(s)) {
+                        b19.breakNaturally();
+                    }
+                    if (b19.getType() == Material.getMaterial(s)) {
+                        b19.breakNaturally();
+                    }
+                    if (b20.getType() == Material.getMaterial(s)) {
+                        b20.breakNaturally();
+                    }
+                    if (b21.getType() == Material.getMaterial(s)) {
+                        b21.breakNaturally();
+                    }
+                    if (b22.getType() == Material.getMaterial(s)) {
+                        b22.breakNaturally();
+                    }
+                    if (b23.getType() == Material.getMaterial(s)) {
+                        b23.breakNaturally();
+                    }
+                    if (b24.getType() == Material.getMaterial(s)) {
+                        b24.breakNaturally();
+                    }
                 }
-                if (b2.getType() == Material.getMaterial(s)) {
-                    b2.breakNaturally();
+            }
+        } else if (big == 3) {
+            for (String s : plugin.breakable) {
+                if (target.getRelative(BlockFace.UP).getType() == Material.AIR) {
+                    b1 = target.getRelative(BlockFace.NORTH, 1);
+                    b2 = target.getRelative(BlockFace.NORTH_EAST, 1);
+                    b3 = target.getRelative(BlockFace.EAST, 1);
+                    b4 = target.getRelative(BlockFace.SOUTH_EAST, 1);
+                    b5 = target.getRelative(BlockFace.SOUTH, 1);
+                    b6 = target.getRelative(BlockFace.SOUTH_WEST, 1);
+                    b7 = target.getRelative(BlockFace.WEST, 1);
+                    b8 = target.getRelative(BlockFace.NORTH_WEST, 1);
+
+                    if (b1.getType() == Material.getMaterial(s)) {
+                        b1.breakNaturally();
+                    }
+                    if (b2.getType() == Material.getMaterial(s)) {
+                        b2.breakNaturally();
+                    }
+                    if (b3.getType() == Material.getMaterial(s)) {
+                        b3.breakNaturally();
+                    }
+                    if (b4.getType() == Material.getMaterial(s)) {
+                        b4.breakNaturally();
+                    }
+                    if (b5.getType() == Material.getMaterial(s)) {
+                        b5.breakNaturally();
+                    }
+                    if (b6.getType() == Material.getMaterial(s)) {
+                        b6.breakNaturally();
+                    }
+                    if (b7.getType() == Material.getMaterial(s)) {
+                        b7.breakNaturally();
+                    }
+                    if (b8.getType() == Material.getMaterial(s)) {
+                        b8.breakNaturally();
+                    }
                 }
-                if (b3.getType() == Material.getMaterial(s)) {
-                    b3.breakNaturally();
-                }
-                if (b4.getType() == Material.getMaterial(s)) {
-                    b4.breakNaturally();
-                }
-                if (b5.getType() == Material.getMaterial(s)) {
-                    b5.breakNaturally();
-                }
-                if (b6.getType() == Material.getMaterial(s)) {
-                    b6.breakNaturally();
-                }
-                if (b7.getType() == Material.getMaterial(s)) {
-                    b7.breakNaturally();
-                }
-                if (b8.getType() == Material.getMaterial(s)) {
-                    b8.breakNaturally();
+            }
+        } else if (big == 2) {
+            for (String s : plugin.breakable) {
+                if (target.getRelative(BlockFace.UP).getType() == Material.AIR) {
+                    b1 = target.getRelative(BlockFace.NORTH, 1);
+                    b2 = target.getRelative(BlockFace.EAST, 1);
+                    b3 = target.getRelative(BlockFace.SOUTH, 1);
+                    b4 = target.getRelative(BlockFace.WEST, 1);
+
+                    if (b1.getType() == Material.getMaterial(s)) {
+                        b1.breakNaturally();
+                    }
+                    if (b2.getType() == Material.getMaterial(s)) {
+                        b2.breakNaturally();
+                    }
+                    if (b3.getType() == Material.getMaterial(s)) {
+                        b3.breakNaturally();
+                    }
+                    if (b4.getType() == Material.getMaterial(s)) {
+                        b4.breakNaturally();
+                    }
                 }
             }
         }
