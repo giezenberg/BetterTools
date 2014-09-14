@@ -23,13 +23,6 @@ import org.bukkit.inventory.ItemStack;
 public class PickaxeExplode implements Listener {
     private BetterTools plugin;
     
-    
-    
-    private ItemStack DiamondPickaxe = ToolUtil.createTool(ChatColor.RED + "Diamond" + ChatColor.WHITE + " Explosion-Pickaxe", Material.DIAMOND_PICKAXE, ChatColor.GOLD + "The incredible explosion-pickaxe", ChatColor.GOLD + "Mines a 5x5, very fancy!");
-    private ItemStack GoldPickaxe = ToolUtil.createTool(ChatColor.RED + "Golden" + ChatColor.WHITE + " Explosion-Pickaxe", Material.GOLD_PICKAXE, ChatColor.GOLD + "The incredible explosion-pickaxe", ChatColor.GOLD + "Mines a full 3x3");
-    private ItemStack IronPickaxe = ToolUtil.createTool(ChatColor.RED + "Iron" + ChatColor.WHITE + " Explosion-Pickaxe", Material.IRON_PICKAXE, ChatColor.GOLD + "The incredible explosion-pickaxe", ChatColor.GOLD + "Mines a full 3x3");
-    private ItemStack StonePickaxe = ToolUtil.createTool(ChatColor.RED + "Stone" + ChatColor.WHITE + " Explosion-Pickaxe", Material.STONE_PICKAXE, ChatColor.GOLD + "The incredible explosion-pickaxe", ChatColor.GOLD + "Mines a 3x3 without the corners.");
-    
     public PickaxeExplode(BetterTools instance) {
         this.plugin = instance;
     }
@@ -40,40 +33,41 @@ public class PickaxeExplode implements Listener {
         Block centre = e.getBlock();
         ItemStack item = player.getItemInHand();
         
-        // Validate if some elements aren't null or false
+        /* Validate if some elements aren't null or false
         Validate.isTrue(item.hasItemMeta(), "itemmeta cannot be false");
         Validate.notNull(item.getItemMeta().getDisplayName(), "displayname cannot be nnull");
         Validate.notNull(item.getItemMeta().getLore(), "lore cannot be null");
+        */
         
         if (!item.getItemMeta().getEnchants().containsKey(Enchantment.LOOT_BONUS_BLOCKS) || !item.getItemMeta().getEnchants().containsKey(Enchantment.SILK_TOUCH)) {
             
             // Iron Pickaxe
             if (item.getType() == Material.DIAMOND_PICKAXE) {
                 
-                if (item.getItemMeta().getDisplayName().equals(DiamondPickaxe.getItemMeta().getDisplayName())) {
-                    breaking(5, centre);
+                if (item.getItemMeta().getDisplayName().equals(plugin.DiamondExplode.getItemMeta().getDisplayName())) {
+                    breaking("dia", centre);
                 }
             } else if (item.getType() == Material.GOLD_PICKAXE) {
                 
-                if (item.getItemMeta().getDisplayName().equals(GoldPickaxe.getItemMeta().getDisplayName())) {
-                    breaking(3, centre);
+                if (item.getItemMeta().getDisplayName().equals(plugin.GoldExplode.getItemMeta().getDisplayName())) {
+                    breaking("gold", centre);
                 }
             } else if (item.getType() == Material.IRON_PICKAXE) {
                 
-                if (item.getItemMeta().getDisplayName().equals(IronPickaxe.getItemMeta().getDisplayName())) {
-                    breaking(3, centre);
+                if (item.getItemMeta().getDisplayName().equals(plugin.IronExplode.getItemMeta().getDisplayName())) {
+                    breaking("iron", centre);
                 }
             } else if (item.getType() == Material.STONE_PICKAXE) {
                 
-                if (item.getItemMeta().getDisplayName().equals(StonePickaxe.getItemMeta().getDisplayName())) {
-                    breaking(2, centre);
+                if (item.getItemMeta().getDisplayName().equals(plugin.StoneExplode.getItemMeta().getDisplayName())) {
+                    breaking("stone", centre);
                 }
             }
         }
     }
 
     
-    private void breaking(int big, Block target) {
+    private void breaking(String size, Block target) {
         Block b1;
         Block b2;
         Block b3;
@@ -99,8 +93,8 @@ public class PickaxeExplode implements Listener {
         Block b23;
         Block b24;
         
-        if (big == 5) {
-            for (String s : plugin.breakable) {
+        if (size.equals("dia")) {
+            for (String s : BetterTools.breakable) {
                 if (target.getRelative(BlockFace.UP).getType() == Material.AIR) {
                     // Toplayer
                     b1 = target.getRelative(BlockFace.NORTH_WEST, 2);
@@ -207,8 +201,8 @@ public class PickaxeExplode implements Listener {
                     }
                 }
             }
-        } else if (big == 3) {
-            for (String s : plugin.breakable) {
+        } else if (size.equals("iron") || size.equals("gold")) {
+            for (String s : BetterTools.breakable) {
                 if (target.getRelative(BlockFace.UP).getType() == Material.AIR) {
                     b1 = target.getRelative(BlockFace.NORTH, 1);
                     b2 = target.getRelative(BlockFace.NORTH_EAST, 1);
@@ -245,8 +239,8 @@ public class PickaxeExplode implements Listener {
                     }
                 }
             }
-        } else if (big == 2) {
-            for (String s : plugin.breakable) {
+        } else if (size.equals("stone")) {
+            for (String s : BetterTools.breakable) {
                 if (target.getRelative(BlockFace.UP).getType() == Material.AIR) {
                     b1 = target.getRelative(BlockFace.NORTH, 1);
                     b2 = target.getRelative(BlockFace.EAST, 1);

@@ -4,9 +4,9 @@
 
     <!-- Parent Project Information -->
     <groupId>net.voxelvoid</groupId>
-    <artifactId>BetterPickaxes</artifactId>
+    <artifactId>BetterTools</artifactId>
     <version>0.1-SNAPSHOT</version>
-    <name>BetterPickaxes</name>
+    <name>BetterTools</name>
     <description>BetterTools for VoxelVoid</description>
 
     <!-- Repository Locations -->
