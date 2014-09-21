@@ -1,9 +1,6 @@
 package net.voxelvoid.bettertools.tools.pickaxe;
 
-import java.util.HashMap;
-
 import net.voxelvoid.bettertools.BetterTools;
-import org.apache.commons.lang.Validate;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -32,70 +29,61 @@ public class PickaxeSmelt implements Listener {
         Material brokenm = broken.getType();
         ItemStack item = player.getItemInHand();
         
-        /* Validate if some elements aren't null or false
-        Validate.isTrue(item.hasItemMeta(), "itemmeta cannot be false");
-        Validate.notNull(item.getItemMeta().getDisplayName(), "displayname cannot be null");
-        Validate.notNull(item.getItemMeta().getLore(), "lore cannot be null");
-        */
-        if (item.getType() == Material.DIAMOND_PICKAXE ||
-                item.getType() == Material.GOLD_PICKAXE ||
-                item.getType() == Material.IRON_PICKAXE ||
-                item.getType() == Material.STONE_PICKAXE ||
-                item.getType() == Material.WOOD_PICKAXE) {
-            
-            if (!item.getItemMeta().getEnchants().containsKey(Enchantment.LOOT_BONUS_BLOCKS) ||
-                    !item.getItemMeta().getEnchants().containsKey(Enchantment.SILK_TOUCH)) {
-                
-                // Diamond Pickaxe
-                if (item.getType() == Material.DIAMOND_PICKAXE) {
+        
+        if (item.getItemMeta().hasEnchants()) {
+           if (item.getEnchantments().containsKey(Enchantment.LOOT_BONUS_BLOCKS) || item.getEnchantments().containsKey(Enchantment.SILK_TOUCH)) {
+               return;
+           }
+        }
+        
+        // Diamond Pickaxe
+        if (item.getType() == Material.DIAMOND_PICKAXE) {
 
-                    if (item.getItemMeta().getDisplayName().equals(plugin.DiamondSmelt.getItemMeta().getDisplayName())) {
+            if (item.getItemMeta().getDisplayName().equals(plugin.DiamondSmelt.getItemMeta().getDisplayName())) {
 
-                        if (plugin.DiamondList.containsKey(brokenm)) {
-                            broken.getWorld().dropItemNaturally(broken.getLocation(), plugin.DiamondList.get(broken.getType()));
-                            broken.setType(Material.AIR);
-                        }
-                    }
-                // Gold Pickaxe
-                } else if (item.getType() == Material.GOLD_PICKAXE) {
+                if (BetterTools.DiamondList.containsKey(brokenm)) {
+                    broken.getWorld().dropItemNaturally(broken.getLocation(), BetterTools.DiamondList.get(broken.getType()));
+                    broken.setType(Material.AIR);
+                }
+            }
+        // Gold Pickaxe
+        } else if (item.getType() == Material.GOLD_PICKAXE) {
 
-                    if (item.getItemMeta().getDisplayName().equals(plugin.GoldSmelt.getItemMeta().getDisplayName())) {
+            if (item.getItemMeta().getDisplayName().equals(plugin.GoldSmelt.getItemMeta().getDisplayName())) {
 
-                        if (plugin.GoldList.containsKey(brokenm)) {
-                            broken.getWorld().dropItemNaturally(broken.getLocation(), plugin.GoldList.get(broken.getType()));
-                            broken.setType(Material.AIR);
-                        }
-                    }
-                // Iron Pickaxe
-                } else if (item.getType() == Material.IRON_PICKAXE) {
+                if (BetterTools.GoldList.containsKey(brokenm)) {
+                    broken.getWorld().dropItemNaturally(broken.getLocation(), BetterTools.GoldList.get(broken.getType()));
+                    broken.setType(Material.AIR);
+                }
+            }
+        // Iron Pickaxe
+        } else if (item.getType() == Material.IRON_PICKAXE) {
 
-                    if (item.getItemMeta().getDisplayName().equals(plugin.IronSmelt.getItemMeta().getDisplayName())) {
+            if (item.getItemMeta().getDisplayName().equals(plugin.IronSmelt.getItemMeta().getDisplayName())) {
 
-                        if (plugin.IronList.containsKey(brokenm)) {
-                            broken.getWorld().dropItemNaturally(broken.getLocation(), plugin.IronList.get(broken.getType()));
-                            broken.setType(Material.AIR);
-                        }
-                    }
-                // Stone Pickaxe
-                } else if (item.getType() == Material.STONE_PICKAXE) {
+                if (BetterTools.IronList.containsKey(brokenm)) {
+                    broken.getWorld().dropItemNaturally(broken.getLocation(), BetterTools.IronList.get(broken.getType()));
+                    broken.setType(Material.AIR);
+                }
+            }
+        // Stone Pickaxe
+        } else if (item.getType() == Material.STONE_PICKAXE) {
 
-                    if (item.getItemMeta().getDisplayName().equals(plugin.StoneSmelt.getItemMeta().getDisplayName())) {
+            if (item.getItemMeta().getDisplayName().equals(plugin.StoneSmelt.getItemMeta().getDisplayName())) {
 
-                        if (plugin.StoneList.containsKey(brokenm)) {
-                            broken.getWorld().dropItemNaturally(broken.getLocation(), plugin.StoneList.get(broken.getType()));
-                            broken.setType(Material.AIR);
-                        }
-                    }
-                // Wood Pickaxe
-                } else if (item.getType() == Material.WOOD_PICKAXE) {
+                if (BetterTools.StoneList.containsKey(brokenm)) {
+                    broken.getWorld().dropItemNaturally(broken.getLocation(), BetterTools.StoneList.get(broken.getType()));
+                    broken.setType(Material.AIR);
+                }
+            }
+        // Wood Pickaxe
+        } else if (item.getType() == Material.WOOD_PICKAXE) {
 
-                    if (item.getItemMeta().getDisplayName().equals(plugin.WoodSmelt.getItemMeta().getDisplayName())) {
+            if (item.getItemMeta().getDisplayName().equals(plugin.WoodSmelt.getItemMeta().getDisplayName())) {
 
-                        if (plugin.WoodList.containsKey(brokenm)) {
-                            broken.getWorld().dropItemNaturally(broken.getLocation(), plugin.WoodList.get(broken.getType()));
-                            broken.setType(Material.AIR);
-                        }
-                    }
+                if (BetterTools.WoodList.containsKey(brokenm)) {
+                    broken.getWorld().dropItemNaturally(broken.getLocation(), BetterTools.WoodList.get(broken.getType()));
+                    broken.setType(Material.AIR);
                 }
             }
         }

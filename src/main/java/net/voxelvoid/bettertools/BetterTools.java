@@ -3,11 +3,14 @@ package net.voxelvoid.bettertools;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import net.voxelvoid.bettertools.commands.CommandSmelt;
 import net.voxelvoid.bettertools.commands.CommandExplode;
-import net.voxelvoid.bettertools.tools.pickaxe.PickaxeExplode;
+import net.voxelvoid.bettertools.handlers.PickaxeExplosionHandler;
+import net.voxelvoid.bettertools.handlers.PlayerInteractHandler;
 import net.voxelvoid.bettertools.tools.pickaxe.PickaxeSmelt;
 import net.voxelvoid.bettertools.util.ToolUtil;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -37,12 +40,20 @@ public class BetterTools extends JavaPlugin {
     public static HashMap<Material, ItemStack> StoneList = new HashMap<>();
     public static HashMap<Material, ItemStack> WoodList = new HashMap<>();
     
-    public static List<String> breakable = new ArrayList<>();
+    public static List<String> explosionBreakable = new ArrayList<>();
+    
+    // Handlers
+    private PickaxeExplosionHandler pickExplode;
+    private PlayerInteractHandler playerInteract;
     
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new PickaxeSmelt(this), this);
-        getServer().getPluginManager().registerEvents(new PickaxeExplode(this), this);
+        playerInteract = new PlayerInteractHandler();
+        pickExplode = new PickaxeExplosionHandler();
+        
+        pickExplode.init(this);
+        playerInteract.init(this);
         
         // Load the Commands
         loadCommands();
@@ -80,11 +91,15 @@ public class BetterTools extends JavaPlugin {
     }
     
     private static void setupExplosionPick() {
-        breakable.add("STONE");
-        breakable.add("LAPIS_ORE");
-        breakable.add("REDSTONE_ORE");
-        breakable.add("IRON_ORE");
-        breakable.add("GOLD_ORE");
-        breakable.add("DIAMOND_ORE");
+        explosionBreakable.add("STONE");
+        explosionBreakable.add("LAPIS_ORE");
+        explosionBreakable.add("REDSTONE_ORE");
+        explosionBreakable.add("IRON_ORE");
+        explosionBreakable.add("GOLD_ORE");
+        explosionBreakable.add("DIAMOND_ORE");
+    }
+
+    public PlayerInteractHandler getPlayerInteractHandler() {
+        return playerInteract;
     }
 }

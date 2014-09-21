@@ -1,0 +1,12 @@
+name: BetterTools
+version: 0.0.1
+main: net.voxelvoid.bettertools.BetterTools
+author: "VoxelVoid Dev Team"
+
+commands:
+    explode:
+        usage: /<command> <type>
+        description: Gives you one of the mighty exploding tools
+    smelt:
+        usage: /<command> <type>
+        description: Gives you one of the mighty smelting tools

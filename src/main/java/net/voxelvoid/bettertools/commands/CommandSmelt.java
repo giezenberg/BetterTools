@@ -43,7 +43,7 @@ public class CommandSmelt implements CommandExecutor {
                     
                     if (args[0].equalsIgnoreCase("dia") || args[0].equalsIgnoreCase("diamond")) {
                         player.getInventory().addItem(plugin.DiamondSmelt);
-                        player.sendMessage("You have received a Diamond Smelters-Pickaxe. Have fun!");
+                        player.sendMessage(plugin.prefix + "You have received a Diamond Smelters-Pickaxe. Have fun!");
                     } else if (args[0].equalsIgnoreCase("gold")) {
                         player.getInventory().addItem(plugin.GoldSmelt);
                         player.sendMessage(plugin.prefix + "You have recieved a Gold Smelters-Pickaxe. Have fun!");
